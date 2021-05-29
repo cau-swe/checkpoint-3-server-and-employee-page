@@ -12,4 +12,8 @@ public class LoginVerifier {
     public boolean verify(String password, User user) {
         return passwordEncoder.matches(password, user.getPassword());
     }
+
+    public String encode(String password) {
+        return passwordEncoder.encode(password);
+    }
 }
