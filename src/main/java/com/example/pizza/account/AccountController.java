@@ -1,6 +1,5 @@
 package com.example.pizza.account;
 
-import com.example.pizza.db.UserDatabaseConnection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,6 +1,5 @@
-package com.example.pizza.db;
+package com.example.pizza.account;
 
-import com.example.pizza.account.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
