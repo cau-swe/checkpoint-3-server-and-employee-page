@@ -15,7 +15,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
+import java.util.Arrays;
 
 @RequiredArgsConstructor
 @SpringBootApplication
@@ -35,7 +35,9 @@ public class PizzaApplication implements ApplicationRunner {
         userDatabaseConnection.save(new User(null, "종업원", "1234"));
         User orderer = userDatabaseConnection.save(new User(null, "홍길동", "1234"));
         Menu menu = menuDatabaseConnection.save(new Menu(null, "페퍼로니 피자", "", 18000));
+        Menu menu2 = menuDatabaseConnection.save(new Menu(null, "포테이토 피자", "", 16000));
         Cart cart = cartDatabaseConnection.save(new Cart(null, orderer, menu, 2));
-        orderDatabaseConnection.save(new Order(null, orderer.getId(), Collections.singletonList(cart), "대기 중"));
+        Cart cart2 = cartDatabaseConnection.save(new Cart(null, orderer, menu2, 1));
+        orderDatabaseConnection.save(new Order(null, orderer.getId(), Arrays.asList(cart, cart2), "대기 중"));
     }
 }

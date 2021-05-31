@@ -30,4 +30,8 @@ public class Cart {
     public Cart(Long id, Long userId, Long menuId, int amount) {
         this(id, new User(userId, null, null), new Menu(menuId, null, null, 0), amount);
     }
+
+    public int getPrice() {
+        return menu.getPrice() * amount;
+    }
 }

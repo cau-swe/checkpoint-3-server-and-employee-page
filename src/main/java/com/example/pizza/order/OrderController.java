@@ -1,5 +1,6 @@
 package com.example.pizza.order;
 
+import com.example.pizza.menu.cart.Cart;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,14 @@ public class OrderController {
             model.addAttribute("order", order);
             model.addAttribute("carts", order.getCarts());
             model.addAttribute("user", order.getCarts().get(0).getUser());
-            model.addAttribute("menu", order.getCarts().get(0).getMenu());
+
+            int totalPrice = order.getCarts()
+                    .stream()
+                    .map(Cart::getPrice)
+                    .mapToInt(Integer::intValue)
+                    .sum();
+
+            model.addAttribute("totalPrice", totalPrice);
             return "order-detail";
         }
         return "not-found";
@@ -37,6 +45,8 @@ public class OrderController {
             order.changeState(orderState);
             Order saved = orderDatabaseConnection.save(order);
             model.addAttribute("order", saved);
+            model.addAttribute("carts", order.getCarts());
+            model.addAttribute("user", order.getCarts().get(0).getUser());
             return "order-detail";
         }
         return "not-found";

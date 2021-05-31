@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>주문 상세</title>
+</head>
+<body>
+<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+  <h1>주문 상세 정보</h1>
+  <div style="display: flex; flex-direction: column;  align-items: center;">
+    <h2>주문자</h2>
+    <span th:text="${user.name}"></span>
+    <h2>주문 내역</h2>
+    <ul th:each="cart : ${carts}">
+      <li th:text="|${cart.menu.name} - ${cart.amount}개|"></li>
+    </ul>
+    <div style="display: flex; flex-direction: column;  align-items: center;">
+      <h2>총 가격</h2>
+      <span th:text="${totalPrice} + '원'"></span>
+    </div>
+    <div style="display: flex; flex-direction: column;  align-items: center;">
+      <h2>주문 상태</h2>
+      <span th:text="${order.state}"></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
