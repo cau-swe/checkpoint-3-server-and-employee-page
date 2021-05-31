@@ -19,8 +19,18 @@
       <span th:text="${totalPrice} + '원'"></span>
     </div>
     <div style="display: flex; flex-direction: column;  align-items: center;">
-      <h2>주문 상태</h2>
+      <h2>현재 주문 상태</h2>
       <span th:text="${order.state}"></span>
+      <h2>주문 상태 변경</h2>
+      <form method="post" th:action="|/orders/${order.id}/state|">
+        <select id="state" name="state">
+          <option value="대기 중">대기 중</option>
+          <option value="준비 중">준비 중</option>
+          <option value="배달 중">배달 중</option>
+          <option value="배달 완료">배달 완료</option>
+          <input type="submit" value="변경하기">
+        </select>
+      </form>
     </div>
   </div>
 </div>
