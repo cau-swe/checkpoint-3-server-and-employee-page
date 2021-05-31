@@ -4,34 +4,69 @@
   <meta charset="UTF-8">
   <title>주문 상세</title>
 </head>
-<body>
+<body style="font-family: sans-serif">
 <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
-  <h1>주문 상세 정보</h1>
+  <h1 style="border-top: 1px solid #5D6975;
+    border-bottom: 1px solid #5D6975;
+    color: #5D6975;
+    font-size: 2.4em;
+    line-height: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    margin-top: 5rem;">주문 상세 정보</h1>
+  <div
+    style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center;">
+    <span style="margin-right: 1rem;">주문자</span>
+    <h3 th:text="${user.name}"></h3>
+  </div>
+  <table style="margin-bottom: 1rem">
+    <thead>
+    <tr>
+      <th style="padding: 5px 20px;
+    color: #5D6975;
+    border-bottom: 1px solid #C1CED9;
+    white-space: nowrap;
+    font-weight: bold;">메뉴
+      </th>
+      <th style="padding: 5px 20px;
+    color: #5D6975;
+    border-bottom: 1px solid #C1CED9;
+    white-space: nowrap;
+    font-weight: bold;">개수
+      </th>
+      <th style="padding: 5px 20px;
+    color: #5D6975;
+    border-bottom: 1px solid #C1CED9;
+    white-space: nowrap;
+    font-weight: bold;">가격
+      </th>
+    </tr>
+    </thead>
+    <tbody th:each="cart: ${carts}">
+    <tr>
+      <td style="text-align: center" th:text="${cart.menu.name}"></td>
+      <td style="text-align: center" th:text="${cart.amount}"></td>
+      <td style="text-align: center" th:text="${cart.amount * cart.menu.price}"></td>
+    </tr>
+    </tbody>
+  </table>
   <div style="display: flex; flex-direction: column;  align-items: center;">
-    <h2>주문자</h2>
-    <span th:text="${user.name}"></span>
-    <h2>주문 내역</h2>
-    <ul th:each="cart : ${carts}">
-      <li th:text="|${cart.menu.name} - ${cart.amount}개|"></li>
-    </ul>
-    <div style="display: flex; flex-direction: column;  align-items: center;">
-      <h2>총 가격</h2>
-      <span th:text="${totalPrice} + '원'"></span>
-    </div>
-    <div style="display: flex; flex-direction: column;  align-items: center;">
-      <h2>현재 주문 상태</h2>
-      <span th:text="${order.state}"></span>
-      <h2>주문 상태 변경</h2>
-      <form method="post" th:action="|/orders/${order.id}/state|">
-        <select id="state" name="state">
-          <option value="대기 중">대기 중</option>
-          <option value="준비 중">준비 중</option>
-          <option value="배달 중">배달 중</option>
-          <option value="배달 완료">배달 완료</option>
-          <input type="submit" value="변경하기">
-        </select>
-      </form>
-    </div>
+    <h3>총 가격</h3>
+    <span th:text="${totalPrice} + '원'"></span>
+  </div>
+  <div style="display: flex; flex-direction: column;  align-items: center;">
+    <h3>현재 주문 상태</h3>
+    <span th:text="${order.state}"></span>
+    <h3>주문 상태 변경</h3>
+    <form method="post" th:action="|/orders/${order.id}/state|">
+      <select id="state" name="state">
+        <option value="대기 중">대기 중</option>
+        <option value="준비 중">준비 중</option>
+        <option value="배달 중">배달 중</option>
+        <option value="배달 완료">배달 완료</option>
+        <input type="submit" value="변경하기">
+      </select>
+    </form>
   </div>
 </div>
 </body>
