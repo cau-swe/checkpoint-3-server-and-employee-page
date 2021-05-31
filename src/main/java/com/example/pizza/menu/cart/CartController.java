@@ -14,6 +14,6 @@ public class CartController {
     @PostMapping("/carts")
     public ResponseEntity<CartResponse> addPizzaToCart(@RequestBody AddPizzaToCartRequest request) {
         Cart saved = cartDatabaseConnection.save(new Cart(null, request.getUserId(), request.getMenuId(), request.getAmount()));
-        return ResponseEntity.ok(new CartResponse(saved.getId(), saved.getUserId(), saved.getMenuId(), saved.getAmount()));
+        return ResponseEntity.ok(new CartResponse(saved.getId(), saved.getUser().getId(), saved.getMenu().getId(), saved.getAmount()));
     }
 }

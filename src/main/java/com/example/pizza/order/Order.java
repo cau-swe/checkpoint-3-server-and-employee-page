@@ -1,5 +1,6 @@
 package com.example.pizza.order;
 
+import com.example.pizza.menu.cart.Cart;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +20,9 @@ public class Order {
 
     private Long userId;
 
-    @ElementCollection
-    private List<Long> cartIds;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id")
+    private List<Cart> carts;
 
     private String state;
 
